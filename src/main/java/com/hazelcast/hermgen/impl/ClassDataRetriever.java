@@ -67,13 +67,13 @@ public class ClassDataRetriever {
     private void init(HazelcastInstance hzInstance) {
         if (hzInstance == null) {
             Config config = new Config();
-            config.getGroupConfig().setName("hz-distributedclassloader-group");
+            config.getGroupConfig().setName("hermgen-group");
             hazelcastInstance = Hazelcast.newHazelcastInstance(config);
         } else {
             hazelcastInstance = hzInstance;
         }
-        executorService = hazelcastInstance.getExecutorService("hz-distributedclassloader-executor");
-        classDataMap = hazelcastInstance.getMap("hz-distributedclassloader-map");
+        executorService = hazelcastInstance.getExecutorService("hermgen-executor");
+        classDataMap = hazelcastInstance.getMap("hermgen-map");
         cluster = hazelcastInstance.getCluster();
     }
 
