@@ -43,11 +43,13 @@ You can change `hermgen.version` to any existing **HermGen** library version.
 
 3. Configurations
 ==============
-- `hazelcast.hermgen.dontCreateEmbeddedInstance`: Disables creating embedded Hazelcast instance to connect the cluster for retrieving requested class data.So in this case **HermGen** expects Hazelcast instance configured programmatically by user as `HermGenDistributedClassLoader.getInstance().setHazelcastInstance(hazelcastInstance);`. Default value is `false`.
+- `hazelcast.hermgen.dontCreateEmbeddedInstance`: Disables creating embedded Hazelcast instance to connect the cluster for retrieving requested class data. So in this case **HermGen** expects Hazelcast instance configured programmatically by user as `HermGenDistributedClassLoader.getInstance().setHazelcastInstance(hazelcastInstance);`. Default value is `false`.
 
 4. Usage
 ==============
 To enable HermGen, you must set the system classloader by `-Djava.system.class.loader=com.hazelcast.hermgen.HermGenDistributedClassLoader` as VM argument.
+
+By default, `HermGenDistributedClassLoader` starts an embedded Hazelcast instance to connect the cluster for retrieving requested class data.
 
 
 5. Contribution
