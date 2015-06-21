@@ -47,10 +47,19 @@ You can change `hermgen.version` to any existing **HermGen** library version.
 
 4. Usage
 ==============
-To enable HermGen, you must set the system classloader by `-Djava.system.class.loader=com.hazelcast.hermgen.HermGenDistributedClassLoader` as VM argument.
+To enable **HermGen**, you must set the system classloader by `-Djava.system.class.loader=com.hazelcast.hermgen.HermGenDistributedClassLoader` as VM argument.
 
-By default, `HermGenDistributedClassLoader` starts an embedded Hazelcast instance to connect the cluster for retrieving requested class data.
+By default, `HermGenDistributedClassLoader` starts an embedded Hazelcast instance (with group name `hermgen-group`) to connect the cluster for retrieving requested class data. 
 
+If you want to provide your custom Hazelcast instance, you must set `hazelcast.hermgen.dontCreateEmbeddedInstance` to `true` by `-Dhazelcast.hermgen.dontCreateEmbeddedInstance=true` and you can inject your Hazelcast instance over `HermGenDistributedClassLoader` like this:
+
+``` java
+HazelcastInstance myHzInstance = ...
+...
+HermGenDistributedClassLoader.getInstance().setHazelcastInstance(myHzInstance);
+```
+
+However note that, until you inject your Hazelcast instance to `HermGenDistributedClassLoader`, `HermGenDistributedClassLoader` doesn't search unknown classes over cluster so you get `ClassNotFoundException` for classes these are not exist in your local classpath.
 
 5. Contribution
 ==============
